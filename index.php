@@ -5,7 +5,7 @@ function get_web_page( $url,$curl_data ) {
         CURLOPT_HEADER         => false,        // don't return headers 
         CURLOPT_FOLLOWLOCATION => true,         // follow redirects 
         CURLOPT_ENCODING       => "",           // handle all encodings 
-        CURLOPT_USERAGENT      => "spider",     // who am i 
+        CURLOPT_USERAGENT      => "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",     // who am i 
         CURLOPT_AUTOREFERER    => true,         // set referer on redirect 
         CURLOPT_CONNECTTIMEOUT => 120,          // timeout on connect 
         CURLOPT_TIMEOUT        => 120,          // timeout on response 
@@ -31,16 +31,7 @@ function get_web_page( $url,$curl_data ) {
     return $header; 
 } 
 
-
-
 $url = $_GET["url"];
-
-
-
-
 $curl_data = http_build_query($_POST, '', '&');
-
-
-
 $response = get_web_page($url,$curl_data); 
-echo ($response["content"]);
+echo $response["content"];
