@@ -1,5 +1,5 @@
 <?php 
-function get_web_page( $url,$curl_data ) { 
+function get_web_page( $url,$curl_data=NULL ) { 
     $options = array( 
         CURLOPT_RETURNTRANSFER => true,         // return web page 
         CURLOPT_HEADER         => false,        // don't return headers 
@@ -10,7 +10,7 @@ function get_web_page( $url,$curl_data ) {
         CURLOPT_CONNECTTIMEOUT => 120,          // timeout on connect 
         CURLOPT_TIMEOUT        => 120,          // timeout on response 
         CURLOPT_MAXREDIRS      => 10,           // stop after 10 redirects 
-        CURLOPT_POST           => (isset($curl_data)) ? $curl_data : 0,            // i am sending post data 
+        CURLOPT_POST           => (!$curl_data) ? 0 : 1,            // i am sending post data 
         CURLOPT_POSTFIELDS     => $curl_data,    // this are my post vars 
         CURLOPT_SSL_VERIFYHOST => 0,            // don't verify ssl 
         CURLOPT_SSL_VERIFYPEER => false,        // 
@@ -29,9 +29,10 @@ function get_web_page( $url,$curl_data ) {
      // $header['errmsg']  = $errmsg; 
      $header['content'] = $content; 
     return $header; 
-} 
+}
 
 $url = $_GET["url"];
 $curl_data = http_build_query($_POST, '', '&');
 $response = get_web_page($url,$curl_data); 
 echo $response["content"];
+
