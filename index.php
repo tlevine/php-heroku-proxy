@@ -10,7 +10,7 @@ function get_web_page( $url,$curl_data ) {
         CURLOPT_CONNECTTIMEOUT => 120,          // timeout on connect 
         CURLOPT_TIMEOUT        => 120,          // timeout on response 
         CURLOPT_MAXREDIRS      => 10,           // stop after 10 redirects 
-        CURLOPT_POST           => 1,            // i am sending post data 
+        CURLOPT_POST           => (isset($curl_data)) ? $curl_data : 0,            // i am sending post data 
         CURLOPT_POSTFIELDS     => $curl_data,    // this are my post vars 
         CURLOPT_SSL_VERIFYHOST => 0,            // don't verify ssl 
         CURLOPT_SSL_VERIFYPEER => false,        // 
